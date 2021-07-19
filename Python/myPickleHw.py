@@ -4,34 +4,31 @@ In program 1:
   - Ask user to input number of students
   - For each student ask their name, then as their grade
   - Once all names and grades have been input, pickle data to hard drive
-  
+
 In program 2:
   - Read pickled data from hard drive
   - Ask user what student they would like the grade for
   - Read grade back to student
 '''
+import pickle
 
-class Student:
-  def __init__(self, name, grade):
-    self._name = name
-    self._grade = grade
-  
-  def getName(self):
-    return self._name
-  
-  def getGrade(self):
-    return self._grade
-  
+def userInput():
+    studentCount = int(input("How many students are there? "))
+    studentGrades = {}
 
-def pickleData ():
-  studentCount = int(input('How many students are there?'))
-  pass
-  
-  
+    for i in range(1, (studentCount + 1), 1):
+        student = str(input(f"Enter student {i} name: "))
+        age = int(input(f"Enter student {i} grade: "))
+        studentGrades[student] = age
 
-def readData ():
-  pass
+    # Pickle studentGrades as binary file
+    with open('Python/myData.pkl', 'wb') as x:
+        pickle.dump(studentGrades, x)
 
-test = Student('dylan', 80)
 
-print(test.getGrade())
+def readData():
+    with open('Python/myData.pkl', 'rb') as x:
+        data = pickle.load(x)
+    print(data)
+
+readData()
